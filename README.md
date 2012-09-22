@@ -51,6 +51,17 @@ Basta importar a classe do MoIP e sair brincando :-)
     
     print moip.get_resposta() # {sucesso:'Sucesso','token':'KJHSDASKD392847293AHFJKDSAH'}
 
+
+Para checkout transparente basta chamar:
+
+     self.moip.set_checkout_transparente()
+
+neste caso é obrigatorio passar os dados do pagador:
+
+     endereco = dict(Logradouro='Rua xxxxx',Numero='222',Bairro='xxxx',Cidade='xxxx',Estado='xx',CEP='xxxxxx',TelefoneFixo='xxxxxxxxxx')
+     self.moip.set_pagador(Nome='xxxx',Email='xxxxxx',Apelido='vitalbh',IdPagador='x',EnderecoCobranca=endereco)
+
+
 ChangeLog
 ----------
  
