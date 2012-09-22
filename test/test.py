@@ -19,7 +19,7 @@ class MoipTestCase(unittest.TestCase):
 
         endereco = dict(Logradouro='Rua santa ceia',Numero='222',Bairro='Buritis',Cidade='Belo Horizonte',Estado='MG',CEP='30850170',TelefoneFixo='3125124444')
 
-        self.moip.set_pagador(Nome='Victor',Email='***REMOVED***',Apelido='vitalbh',IdPagador='1',EnderecoCobranca=endereco)
+        self.moip.set_pagador(Nome='Victor',Email='vitalbh@gmail.com',Apelido='vitalbh',IdPagador='1',EnderecoCobranca=endereco)
 
         self.moip.envia()
 

@@ -38,9 +38,9 @@ Uso
 
 Basta importar a classe do MoIP e sair brincando :-)
 
-    from moipy import MoIP
+    from moipy import Moip
 
-    moip = MoIP('Razao do Pagamento')
+    moip = Moip('Razao do Pagamento')
 
     moip.set_credenciais(token='seu_token',key='sua_key')
     moip.set_ambiente('sandbox')
