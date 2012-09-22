@@ -6,8 +6,9 @@ Camada de abstração para integração via API com o MoIP em Python.
  - Author: Hebert Amaral
  - Contributor: Ale Borba
  - Contributor: Igor Hercowitz
+ - Contributor: Victor Hugo
  
- - Version: v0.2
+ - Version: v0.3
 
 Dependências
 ------------
@@ -52,6 +53,10 @@ Basta importar a classe do MoIP e sair brincando :-)
 
 ChangeLog
 ----------
+ v0.3
+  - Suporte a checkout transparente
+  - Adição dos dados do Pagador
+  - Teste do envio de intrução para checkout transparente
 
  v0.2
   - Refatorações de código
@@ -64,7 +69,6 @@ ToDo
 ------
  
  - Aplicar testes automatizados usando unittest
- - Incluir dados do pagador
  - Validar campos
  
 

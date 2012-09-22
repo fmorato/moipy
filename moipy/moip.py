@@ -83,7 +83,23 @@ class Moip():
         self._monta_xml(self.xml_node, unique=True, InstrucaoUnica=dict(Recebedor=dict(LoginMoip=login_moip, Email=email, Apelido=apelido)))
 
         return self
-    
+
+    def set_pagador(self, **pagador):
+
+        if not 'EnderecoCobranca' in pagador:
+            return False
+
+        if not 'Pais' in pagador['EnderecoCobranca']:
+            pagador['EnderecoCobranca']['Pais'] = 'BRA'
+
+        self._monta_xml(self.xml_node, unique=True, InstrucaoUnica=dict(Pagador=pagador))
+
+        return self
+
+    def set_checkout_transparente(self):
+
+        instrucao = self._monta_xml(self.xml_node, unique=True, InstrucaoUnica=dict())
+        instrucao.find('InstrucaoUnica').set('TipoValidacao','Transparente')
 
     def envia(self):
         resposta = RespostaMoIP()
@@ -91,7 +107,7 @@ class Moip():
         passwd = self.token + ":" + self.key
 
         passwd64 = base64.b64encode(passwd)
-        
+
         curl = pycurl.Curl()
         curl.setopt(pycurl.URL,self.url)
         curl.setopt(pycurl.HTTPHEADER,["Authorization: Basic " + passwd64])
@@ -102,7 +118,7 @@ class Moip():
         curl.setopt(pycurl.WRITEFUNCTION,resposta.callback)
         curl.perform()
         curl.close()
-         
+
         self.retorno = resposta.conteudo
 
         return self
