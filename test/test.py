@@ -6,7 +6,7 @@ class MoipTestCase(unittest.TestCase):
 
     def setUp(self):
         self.moip = Moip('Razao do Pagamento')
-        self.moip.set_credenciais(token='PUMLYQSCI0JNCFGQQWGGKJNMG4QRX5DH',key='PHMLUTXWEJ0D5VJZDBFUFZYPZ4IWIC2AGUWMVRWE')
+        self.moip.set_credenciais(token='seu token',key='sua key')
         self.moip.set_ambiente('sandbox')
 
 
