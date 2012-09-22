@@ -53,17 +53,18 @@ Basta importar a classe do MoIP e sair brincando :-)
 
 ChangeLog
 ----------
- v0.3
-  - Suporte a checkout transparente
-  - Adição dos dados do Pagador
-  - Teste do envio de intrução para checkout transparente
+ 
+v0.3
+ - Suporte a checkout transparente
+ - Adição dos dados do Pagador
+ - Teste do envio de intrução para checkout transparente
 
- v0.2
-  - Refatorações de código
-  - Retirada dos DocTests
+v0.2
+ - Refatorações de código
+ - Retirada dos DocTests
 
- v0.1
-  - First version
+v0.1
+ - First version
 
 ToDo
 ------
