@@ -7,8 +7,9 @@ Camada de abstração para integração via API com o MoIP em Python.
  - Contributor: Ale Borba
  - Contributor: Igor Hercowitz
  - Contributor: Victor Hugo
+ - Contributor: Felipe Gubert Cruz
  
- - Version: v0.3
+ - Version: v0.4
 
 Dependências
 ------------
@@ -16,7 +17,7 @@ Dependências
 O MoIPy tem as seguintes dependências:
 
  - lxml
- - pycurl
+ - httplib
 
 Instalação
 ----------
@@ -64,6 +65,11 @@ neste caso é obrigatorio passar os dados do pagador:
 
 ChangeLog
 ----------
+
+v0.4
+ - Troca do pyCurl por httplib
+ - Melhorias no código/documentação
+ - Adiciona arquivo de teste na raiz do projeto.
  
 v0.3
  - Suporte a checkout transparente
