@@ -7,8 +7,9 @@ Camada de abstração para integração via API com o MoIP em Python.
  - Contributor: Ale Borba
  - Contributor: Igor Hercowitz
  - Contributor: Victor Hugo
- 
- - Version: v0.3
+ - Contributor: Felipe Gubert Cruz
+
+ - Version: v0.4
 
 Dependências
 ------------
@@ -16,7 +17,7 @@ Dependências
 O MoIPy tem as seguintes dependências:
 
  - lxml
- - pycurl
+ - httplib
 
 Instalação
 ----------
@@ -48,7 +49,7 @@ Basta importar a classe do MoIP e sair brincando :-)
     moip.set_data_vencimento('yyyy-mm-dd')
     moip.set_id_proprio('abc123')
     moip.envia()
-    
+
     print moip.get_resposta() # {sucesso:'Sucesso','token':'KJHSDASKD392847293AHFJKDSAH'}
 
 
@@ -64,7 +65,17 @@ neste caso é obrigatorio passar os dados do pagador:
 
 ChangeLog
 ----------
- 
+
+v0.3
+ - Suporte a checkout transparente
+ - Adição dos dados do Pagador
+ - Teste do envio de intrução para checkout transparente
+
+v0.4
+ - Troca do pyCurl por httplib
+ - Melhorias no código/documentação
+ - Adiciona arquivo de teste na raiz do projeto.
+
 v0.3
  - Suporte a checkout transparente
  - Adição dos dados do Pagador
@@ -79,10 +90,10 @@ v0.1
 
 ToDo
 ------
- 
+
  - Aplicar testes automatizados usando unittest
  - Validar campos
- 
+
 
 Licença
 ------
