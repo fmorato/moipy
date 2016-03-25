@@ -9,4 +9,4 @@ moip.set_data_vencimento('yyyy-mm-dd')
 moip.set_id_proprio('abc1234')
 moip.envia()
 
-print moip.get_resposta()
+print(moip.get_resposta())
