@@ -1,13 +1,19 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-import base64
-import httplib
+import requests
 from lxml import etree
 
 
-class Moip():
+class Moip:
 
     def __init__(self, razao, xml_node="EnviarInstrucao"):
+        self.token = ''
+        self.key = ''
+        self.host = ''
+        self.post_url = ''
+        self.url = ''
+        self.status = ''
+        self.retorno = ''
 
         if xml_node:
             self.xml_node = etree.Element(xml_node)
@@ -38,6 +44,8 @@ class Moip():
 
     def set_credenciais(self, token, key):
         """Define as credenciais utilizadas para autenticar a chamada aos webservices
+        :param key:
+        :param token:
         """
 
         self.token = token
@@ -47,6 +55,7 @@ class Moip():
 
     def set_ambiente(self, ambiente):
         """Define se o ambiente é o de homologação (sandbox) ou de produção
+        :param ambiente:
         """
 
         if ambiente == "sandbox":
@@ -62,22 +71,25 @@ class Moip():
 
     def set_valor(self, valor):
         """Define o valor a ser enviado
+        :param valor:
         """
 
         self._monta_xml(self.xml_node, unique=True, InstrucaoUnica=dict(Valores=dict(Valor=valor)))
 
         return self
 
-    def set_id_proprio(self, id):
+    def set_id_proprio(self, id_transacao):
         """Define o ID proprio da transação
+        :param id_transacao:
         """
 
-        self._monta_xml(self.xml_node, unique=True, InstrucaoUnica=dict(IdProprio=id))
+        self._monta_xml(self.xml_node, unique=True, InstrucaoUnica=dict(IdProprio=id_transacao))
 
         return self
 
     def set_data_vencimento(self, data):
         """Define a data de vencimento
+        :param data:
         """
 
         self._monta_xml(self.xml_node, unique=True, InstrucaoUnica=dict(DataVencimento=data))
@@ -86,9 +98,16 @@ class Moip():
 
     def set_recebedor(self, login_moip, email, apelido):
         """Define o recebedor
+        :param apelido:
+        :param email:
+        :param login_moip:
         """
 
-        self._monta_xml(self.xml_node, unique=True, InstrucaoUnica=dict(Recebedor=dict(LoginMoip=login_moip, Email=email, Apelido=apelido)))
+        self._monta_xml(self.xml_node, unique=True, InstrucaoUnica=dict(
+                                                    Recebedor=dict(
+                                                        LoginMoip=login_moip,
+                                                        Email=email,
+                                                        Apelido=apelido)))
 
         return self
 
@@ -96,10 +115,10 @@ class Moip():
         """Define o pagador e endereço de cobrança
         """
 
-        if not 'EnderecoCobranca' in pagador:
+        if 'EnderecoCobranca' not in pagador:
             return False
 
-        if not 'Pais' in pagador['EnderecoCobranca']:
+        if 'Pais' not in pagador['EnderecoCobranca']:
             pagador['EnderecoCobranca']['Pais'] = 'BRA'
 
         self._monta_xml(self.xml_node, unique=True, InstrucaoUnica=dict(Pagador=pagador))
@@ -116,25 +135,18 @@ class Moip():
     def envia(self):
         """Comunica com o webservice e envia a transação
         """
-        # base64 encode the username and password
-        auth = base64.encodestring('%s:%s' % (self.token, self.key)).replace('\n', '')
-
-        webservice = httplib.HTTPSConnection(self.host)
-        # headers
-        webservice.putrequest("POST", self.post_url)
-        webservice.putheader("Host", self.host)
-        webservice.putheader("User-Agent", "Mozilla/4.0")
-        webservice.putheader("Content-type", "text/html; charset=\"UTF-8\"")
-        webservice.putheader("Content-length", "%d" % len(self._get_xml()))
-        webservice.putheader("Authorization", "Basic %s" % auth)
-
-        webservice.endheaders()
-        webservice.send(self._get_xml())
-
-        resposta = webservice.getresponse()
-
-        self.status = resposta.status
-        self.retorno = resposta.read()
+        auth = self.token, self.key
+        headers = {
+            'User-Agent': 'Mozilla/4.0',
+            'Content-type': 'text/html; charset="UTF-8"',
+            'Accept': 'application/xml'
+        }
+        try:
+            r = requests.post(self.url, data=self._get_xml(), headers=headers, auth=auth)
+            self.status = r.status_code
+            self.retorno = r.text
+        except:
+            print('could not fetch url')
 
         return self
 

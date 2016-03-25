@@ -3,10 +3,18 @@
 from distutils.core import setup
 
 setup(name='Moipy',
-      version='0.4',
+      version='0.4.1',
       description='Python integration with MoIP payment gateway via API',
-      author=['Herberth Amaral','Ale Borba','Victor', 'Felipe Gubert'],
-      author_email=['herberthamaral@gmail.com','ale.alvesborba@gmail.com','vitalbh@gmail.com', 'felipe.gubert@gmail.com'],
+      author=['Herberth Amaral',
+              'Ale Borba',
+              'Victor',
+              'Felipe Gubert',
+              'Felipe Morato'],
+      author_email=['herberthamaral@gmail.com',
+                    'ale.alvesborba@gmail.com',
+                    'vitalbh@gmail.com',
+                    'felipe.gubert@gmail.com',
+                    'me@fmorato.com'],
       url='http://labs.moip.com.br/',
       packages=['moipy'],
       classifiers=[
@@ -18,4 +26,8 @@ setup(name='Moipy',
         'Operating System :: Microsoft :: Windows',
         'Operating System :: POSIX',
         'Programming Language :: Python',
-      ])
+      ],
+      requires=[
+        'lxml',
+        'requests']
+      )

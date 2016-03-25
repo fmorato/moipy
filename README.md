@@ -8,8 +8,9 @@ Camada de abstração para integração via API com o MoIP em Python.
  - Contributor: Igor Hercowitz
  - Contributor: Victor Hugo
  - Contributor: Felipe Gubert Cruz
+ - Contributor: Felipe Morato
 
- - Version: v0.4
+ - Version: v0.4.1
 
 Dependências
 ------------
@@ -17,18 +18,14 @@ Dependências
 O MoIPy tem as seguintes dependências:
 
  - lxml
- - httplib
+ - requests
 
 Instalação
 ----------
 
-A instalação pode ser feita via pip:
+Pelo repositório do Github:
 
-    pip install moipy
-
-Ou então pelo repositório do Github:
-
-    git clone git://github.com/moiplabs/moipy.git
+    git clone git://github.com/fmorato/moipy.git
     cd moipy
     python moipy/moip.py # executa os testes
     python setup.py build
@@ -50,7 +47,7 @@ Basta importar a classe do MoIP e sair brincando :-)
     moip.set_id_proprio('abc123')
     moip.envia()
 
-    print moip.get_resposta() # {sucesso:'Sucesso','token':'KJHSDASKD392847293AHFJKDSAH'}
+    print(moip.get_resposta()) # {sucesso:'Sucesso','token':'KJHSDASKD392847293AHFJKDSAH'}
 
 
 Para checkout transparente basta chamar:
@@ -66,10 +63,9 @@ neste caso é obrigatorio passar os dados do pagador:
 ChangeLog
 ----------
 
-v0.3
- - Suporte a checkout transparente
- - Adição dos dados do Pagador
- - Teste do envio de intrução para checkout transparente
+v0.4.1
+ - Troca do httplib para requests
+ - Suporte para python3
 
 v0.4
  - Troca do pyCurl por httplib
